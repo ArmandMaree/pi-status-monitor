@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Raspberry Pi Status Monitor"
+Parameters:
+  PiLocation:
+    Type: String
+    Description: Where is the Pi location?
+Resources:
+  SpeedMetric:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      MetricName: !Sub ${PiLocation}NetworkSpeed
+      AlarmName: !Sub ${PiLocation}NetworkSpeed
+      # AlarmActions: 
+      #   - TODO
+      ComparisonOperator: LessThanOrEqualToThreshold
+      DatapointsToAlarm: 2
+      EvaluationPeriods: 180
+      # InsufficientDataActions: 
+      #   - TODO
+      Namespace: !Sub NetworkSpeed/${PiLocation}
+      # OKActions: 
+      #   - TODO
+      Period: 60
+      Statistic: Average
+      Threshold: 30
+      TreatMissingData: breaching
+      Unit: "Megabits/Second"
+      Tags: 
+        - Key: Project
+          Value: pi-status-monitor
