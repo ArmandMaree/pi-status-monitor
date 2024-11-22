@@ -48,5 +48,5 @@ speedtest
   })
   .catch((error: Error) => {
     logger.error('Speed test failed')
-    logger.error(error.message)
+    logger.error(error.message ?? error)
   })
