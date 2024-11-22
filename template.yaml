@@ -4,6 +4,12 @@ Parameters:
   PiLocation:
     Type: String
     Description: Where is the Pi location?
+  Threshold:
+    Type: Number
+    Description: Alarm Threshhold
+  Period:
+    Type: Number
+    Description: How often data is placed in seconds
 Resources:
   SpeedMetric:
     Type: AWS::CloudWatch::Alarm
@@ -13,16 +19,16 @@ Resources:
       # AlarmActions: 
       #   - TODO
       ComparisonOperator: LessThanOrEqualToThreshold
-      DatapointsToAlarm: 2
-      EvaluationPeriods: 180
+      DatapointsToAlarm: 1
+      EvaluationPeriods: 2
       # InsufficientDataActions: 
       #   - TODO
       Namespace: !Sub NetworkSpeed/${PiLocation}
       # OKActions: 
       #   - TODO
-      Period: 60
+      Period: !Ref Period
       Statistic: Average
-      Threshold: 30
+      Threshold: !Ref Threshold
       TreatMissingData: breaching
       Unit: "Megabits/Second"
       Tags: 
