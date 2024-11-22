@@ -7,8 +7,6 @@ export const logLevel: LogLevels = (process.env.LOG_LEVEL ||
 
 const targets = []
 
-console.log(ospath.join(__dirname, '../../app.log'))
-
 if (process.env.NODE_ENV === 'development') {
   targets.push({
     target: 'pino-pretty',
@@ -16,11 +14,13 @@ if (process.env.NODE_ENV === 'development') {
       colorize: true,
     },
   })
+  console.log(`Logging to console`)
 } else {
   targets.push({
     target: 'pino/file',
     options: { destination: ospath.join(__dirname, '../../app.log') },
   })
+  console.log(`Logging to ${ospath.join(__dirname, '../../app.log')}`)
 }
 
 const logger = pino({ level: logLevel, transport: { targets } })

@@ -36,7 +36,7 @@ speedtest
     })
 
     try {
-      logger.info('Sending metric to AWS')
+      logger.info(`Sending metric to AWS ${process.env.LOCATION}`)
       await client.send(command)
       logger.info('Sent metric successfully')
     } catch (error) {
