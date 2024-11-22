@@ -70,9 +70,10 @@ const main = async () => {
       logger.error(error.message ?? error)
     }
 
-    if (!successfulTest) {
+    numberOfTriesRemaining -= 1
+
+    if (!successfulTest && numberOfTriesRemaining > 0) {
       logger.error(`Will try again in ${delayBetweenTries} ms`)
-      numberOfTriesRemaining -= 1
       await sleep(delayBetweenTries)
     }
   }
