@@ -29,7 +29,7 @@ const runSpeedTest = async () => {
   try {
     speed = await speedtest.getSpeed()
   } catch (error: any) {
-    logger.error('Speed test failed')
+    logger.error('Speed test failed', error)
     logger.error(error?.message ?? error)
     throw error
   }
@@ -52,7 +52,7 @@ const runSpeedTest = async () => {
     await client.send(command)
     logger.info('Sent metric successfully')
   } catch (error) {
-    logger.error('Failed to send metric to AWS')
+    logger.error('Failed to send metric to AWS', error)
     logger.error(error)
     throw error
   }
