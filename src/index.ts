@@ -72,9 +72,13 @@ const main = async () => {
 
     numberOfTriesRemaining -= 1
 
-    if (!successfulTest && numberOfTriesRemaining > 0) {
-      logger.error(`Will try again in ${delayBetweenTries} ms`)
-      await sleep(delayBetweenTries)
+    if (!successfulTest) {
+      if (numberOfTriesRemaining > 0) {
+        logger.error(`Will try again in ${delayBetweenTries} ms`)
+        await sleep(delayBetweenTries)
+      } else {
+        logger.error(`Max tries exceeded. Giving up.`)
+      }
     }
   }
 }
